@@ -1,2 +1,0 @@
-# Mini_Project_Programmering_af_interaktive_3D_verdener
-Kristian Julsgaard - Mini Project
