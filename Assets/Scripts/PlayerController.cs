@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     float Damage = 1f;
     float Range = 20f;
     public Camera PlayerCamera;
+    public ParticleSystem MuzzleFlash;
 
     //public ParticleSystem ImpactEffect;
 
@@ -56,11 +57,22 @@ public class PlayerController : MonoBehaviour
             VerticalSpeed -= Gravity * Time.deltaTime;
         }
 
+        //Sprinting
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            Speed = 12;
+        }
+        else
+        {
+            Speed = 7;
+        }
+
         //Jumping
         if (Input.GetKeyDown(KeyCode.Space) && CharacterController.isGrounded)
         {
             VerticalSpeed = JumpSpeed;
         }
+        
         //Adds gravity
         Vector3 GravityMove = new Vector3(0, VerticalSpeed, 0);
 
@@ -92,24 +104,40 @@ public class PlayerController : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        //Debug.Log(time);
-        //Using raycast to shoot
-        RaycastHit Hit;
-        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
+        if (Input.GetButtonDown("Fire1") && time >= 0.5f)
         {
-            
-            /*if (Hit.transform.gameObject.CompareTag("Enemy") && time >= 0.2f)
+            time = 0;
+
+            MuzzleFlash.Play();
+
+            //Play Gunshot audio
+            /*AudioSource audio = GetComponent<AudioSource>();
+            audio.clip = GunShot;
+            audio.Play();*/
+
+            //Using raycast to shoot
+            RaycastHit Hit;
+            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
             {
-                time = 0;
 
-                Enemy enemy = Hit.transform.GetComponent<Enemy>();
-                enemy.TakeDamage(Damage);
+                if (Hit.transform.gameObject.CompareTag("Enemy"))
+                {
+                    Enemy enemy = Hit.transform.GetComponent<Enemy>();
+                    enemy.TakeDamage(Damage);
+                }
 
-                //ParticleSystem ImpactGameObject = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
-
-                //Destroy(ImpactGameObject, 2f);
-            }*/
-
+                if (Hit.transform.gameObject.CompareTag("Enemy2"))
+                {
+                    Enemy2 enemy2 = Hit.transform.GetComponent<Enemy2>();
+                    enemy2.TakeDamage(Damage);
+                }
+                /*
+                if (Hit.transform.gameObject.CompareTag("Floor"))
+                {
+                    GameObject ImpactGameObject = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
+                    ImpactGameObject.transform.position += Vector3.up * 0.001f;
+                }*/
+            }
         }
     }
 

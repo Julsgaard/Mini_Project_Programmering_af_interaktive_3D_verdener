@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
     bool dead = false;
 
-    float health = 15;
+    float health = 2;
 
     void Awake()
     {
@@ -35,9 +35,9 @@ public class Enemy : MonoBehaviour
         {
 
             NavMesh.SetDestination(Player.position);
-            //transform.LookAt(Player);
+            transform.LookAt(Player);
 
-            //anim.Play("Run");
+            anim.Play("Run");
 
         }
 
@@ -49,8 +49,8 @@ public class Enemy : MonoBehaviour
         if (health <= 0 && !dead)
         {
             dead = true;
-            //anim["Death"].wrapMode = WrapMode.Once;
-            //anim.Play("Death");
+            anim["Death"].wrapMode = WrapMode.Once;
+            anim.Play("Death");
             NavMesh.enabled = false;
             colliders.enabled = false;
         }
