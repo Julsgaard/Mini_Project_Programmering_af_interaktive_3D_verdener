@@ -25,15 +25,24 @@ public class PlayerController : MonoBehaviour
     float Range = 20f;
     public Camera PlayerCamera;
     public ParticleSystem MuzzleFlash;
-
     //public ParticleSystem ImpactEffect;
+
+
+    //Reload
+    int currentAmmo;
+    int maxAmmo = 6;
+    bool isReloading = false;
+    public GameObject Gun;
+    //int ammo = 12;
+
 
     float time;
 
 
     void Start()
     {
-        
+        currentAmmo = maxAmmo;
+
     }
 
     void Update()
@@ -41,6 +50,12 @@ public class PlayerController : MonoBehaviour
         Move();
         Rotate();
         Shoot();
+        ReloadGun();
+        //AimGun();
+
+        //Debug.Log("ammo: " + ammo);
+
+
     }
 
     private void Move()
@@ -72,7 +87,7 @@ public class PlayerController : MonoBehaviour
         {
             VerticalSpeed = JumpSpeed;
         }
-        
+
         //Adds gravity
         Vector3 GravityMove = new Vector3(0, VerticalSpeed, 0);
 
@@ -104,42 +119,89 @@ public class PlayerController : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && time >= 0.5f)
+        if (Input.GetButtonDown("Fire1") && time >= 0.25f && !isReloading)
         {
-            time = 0;
-
-            MuzzleFlash.Play();
-
-            //Play Gunshot audio
-            /*AudioSource audio = GetComponent<AudioSource>();
-            audio.clip = GunShot;
-            audio.Play();*/
-
-            //Using raycast to shoot
-            RaycastHit Hit;
-            if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
+            if (currentAmmo > 0)
             {
+                time = 0;
 
-                if (Hit.transform.gameObject.CompareTag("Enemy"))
-                {
-                    Enemy enemy = Hit.transform.GetComponent<Enemy>();
-                    enemy.TakeDamage(Damage);
-                }
+                MuzzleFlash.Play();
 
-                if (Hit.transform.gameObject.CompareTag("Enemy2"))
+                currentAmmo--;
+
+                //Debug.Log("currentAmmo: " + currentAmmo);
+
+
+                //Play Gunshot audio
+                /*AudioSource audio = GetComponent<AudioSource>();
+                audio.clip = GunShot;
+                audio.Play();*/
+
+                //Using raycast to shoot
+                RaycastHit Hit;
+                if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
                 {
-                    Enemy2 enemy2 = Hit.transform.GetComponent<Enemy2>();
-                    enemy2.TakeDamage(Damage);
+
+                    if (Hit.transform.gameObject.CompareTag("Enemy"))
+                    {
+                        Enemy enemy = Hit.transform.GetComponent<Enemy>();
+                        enemy.TakeDamage(Damage);
+                    }
+
+                    if (Hit.transform.gameObject.CompareTag("Enemy2"))
+                    {
+                        Enemy2 enemy2 = Hit.transform.GetComponent<Enemy2>();
+                        enemy2.TakeDamage(Damage);
+                    }
+                    /*
+                    if (Hit.transform.gameObject.CompareTag("Floor"))
+                    {
+                        GameObject ImpactGameObject = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
+                        ImpactGameObject.transform.position += Vector3.up * 0.001f;
+                    }*/
                 }
-                /*
-                if (Hit.transform.gameObject.CompareTag("Floor"))
-                {
-                    GameObject ImpactGameObject = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
-                    ImpactGameObject.transform.position += Vector3.up * 0.001f;
-                }*/
+            }
+            else
+            {
+                //Play no shoot sound
             }
         }
     }
+
+    void ReloadGun()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && currentAmmo < 6 && !isReloading)
+        {
+            StartCoroutine(ReloadWaitForSeconds());
+
+        }
+
+        if (isReloading)
+        {
+            //Gun.transform.rotation = Quaternion.Euler(0, 0, 90);
+
+            Gun.transform.Rotate(1f, 0, 0, Space.Self);
+        }
+        else
+        {
+            Gun.transform.localEulerAngles = new Vector3(0, 0, 0);
+        }
+    }
+
+    /*void AimGun()
+    {
+        if (Input.GetButton("Fire2"))
+        {
+            //Debug.Log("Test");
+
+
+        }
+            
+
+    }*/
+
+ 
+
 
 
     void OnTriggerEnter(Collider other)
@@ -150,4 +212,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    IEnumerator ReloadWaitForSeconds()
+    {
+        //Debug.Log("Reloading!");
+
+        isReloading = true;
+
+        //Animation spin gun
+        //Gun.transform.localEulerAngles
+
+        yield return new WaitForSeconds(5);
+
+        currentAmmo = maxAmmo;
+
+        isReloading = false;
+
+        //Debug.Log("currentAmmo: " + currentAmmo);
+
+    }
 }

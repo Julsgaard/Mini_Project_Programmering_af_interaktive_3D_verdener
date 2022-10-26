@@ -219,6 +219,8 @@ MonoBehaviour:
   CharacterController: {fileID: 9144167987712491716}
   CameraHolder: {fileID: 9144167987048446326}
   PlayerCamera: {fileID: 9144167987048446321}
+  MuzzleFlash: {fileID: 0}
+  Gun: {fileID: 3408952028198989022}
 --- !u!1001 &9144167986949205590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -291,5 +293,10 @@ PrefabInstance:
 --- !u!4 &2595436103118206564 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6548879496589514802, guid: 3d6c7430bd21a564489df266ea8864e1, type: 3}
+  m_PrefabInstance: {fileID: 9144167986949205590}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3408952028198989022 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5884405469530735240, guid: 3d6c7430bd21a564489df266ea8864e1, type: 3}
   m_PrefabInstance: {fileID: 9144167986949205590}
   m_PrefabAsset: {fileID: 0}
