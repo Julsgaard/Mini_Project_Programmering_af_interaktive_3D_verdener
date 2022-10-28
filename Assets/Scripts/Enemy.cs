@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
         {
 
             NavMesh.SetDestination(Player.position);
-            transform.LookAt(Player);
+            //transform.LookAt(Player);
 
             anim.Play("Run");
 

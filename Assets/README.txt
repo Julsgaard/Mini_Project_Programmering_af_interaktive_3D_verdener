@@ -7,10 +7,19 @@
 1 Hour 	- Reloading Gun
 1 Hour 	- Making game objective
 1 Hour 	- Menu UI
+1 Hour	- Trees
 
 
 
 Genre: 
 	FPS
 	Horror
+
+
+TODO:
+	Recoil
+	Animations in Hospital
+	Death Screen
+
+	Jump Scare
 

@@ -227,7 +227,9 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
+
+            //GameManager DEAD!!!
         }
     }
 

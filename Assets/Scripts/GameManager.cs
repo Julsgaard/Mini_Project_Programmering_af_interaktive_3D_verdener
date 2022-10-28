@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject CanvasUI;
     public GameObject RenderTextureUI;
     public GameObject MenuPanel;
+    public GameObject Player;
 
     public static int dolls = 0;
 
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         //Keeps the GameManager when changing scene and destroys the new GameManager when restarting level
-        if (instance != null)
+        /*if (instance != null)
         {
             Destroy(gameObject);
             Destroy(CanvasUI);
@@ -34,7 +35,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             DontDestroyOnLoad(CanvasUI);
             DontDestroyOnLoad(RenderTextureUI);
-        }
+        }*/
+
+        Time.timeScale = 0f;
+
     }
 
 
@@ -42,7 +46,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //RenderTextureUI.SetActive(true);
+        RenderTextureUI.SetActive(true);
+        CanvasUI.SetActive(true);
     }
 
     // Update is called once per frame
@@ -55,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene("Menu");
+        //SceneManager.LoadScene("Menu");
         GameIsActive = false;
         PlayerDead = false;
         Time.timeScale = 1f;
@@ -68,12 +73,16 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Scene1");
+        //SceneManager.LoadScene("Scene1");
         GameIsActive = true;
         PlayerDead = false;
         Time.timeScale = 1f;
 
-        MenuPanel.SetActive(false);
+
+
+        //MenuPanel.SetActive(false);
+        CanvasUI.SetActive(false);
+        Player.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
