@@ -12,6 +12,7 @@ public class OpenDoor : MonoBehaviour
         if (firstDoll == null)
         {
             GetComponent<Animator>().Play("OpenDoorAnimation");
+            GetComponent<Animation>().Play("LightFlicker");
         }
     }
 }
