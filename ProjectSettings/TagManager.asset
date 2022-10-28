@@ -9,6 +9,7 @@ TagManager:
   - Actors
   - FxTemporaire
   - Enemy2
+  - Doll
   layers:
   - Default
   - TransparentFX

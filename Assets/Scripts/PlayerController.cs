@@ -35,6 +35,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Gun;
     //int ammo = 12;
 
+    //FlashLight
+    public GameObject flashLight;
+    bool flashLightIsOn = false;
+
 
     float time;
 
@@ -52,6 +56,7 @@ public class PlayerController : MonoBehaviour
         Shoot();
         ReloadGun();
         //AimGun();
+        Flashlight();
 
         //Debug.Log("ammo: " + ammo);
 
@@ -148,11 +153,6 @@ public class PlayerController : MonoBehaviour
                         enemy.TakeDamage(Damage);
                     }
 
-                    if (Hit.transform.gameObject.CompareTag("Enemy2"))
-                    {
-                        Enemy2 enemy2 = Hit.transform.GetComponent<Enemy2>();
-                        enemy2.TakeDamage(Damage);
-                    }
                     /*
                     if (Hit.transform.gameObject.CompareTag("Floor"))
                     {
@@ -200,10 +200,29 @@ public class PlayerController : MonoBehaviour
 
     }*/
 
- 
+
+    //If T is pressed then the flashlight will turn on and off if it is pressed again
+    void Flashlight()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            if (!flashLightIsOn)
+            {
+                flashLight.SetActive(true);
+                flashLightIsOn = true;
+            }
+            else
+            {
+                flashLight.SetActive(false);
+                flashLightIsOn = false;
+            }
+        }
+    }
 
 
 
+
+    //Stops the game if colliding with enemy
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -212,6 +231,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    //Picking up Dolls
+    void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Doll") && Input.GetKey(KeyCode.E))
+        {
+            GameManager.dolls++;
+            Destroy(other.gameObject);
+            Debug.Log(GameManager.dolls);
+        }
+    }
+
+
+    //Reload timer Wait for 5 seconds
     IEnumerator ReloadWaitForSeconds()
     {
         //Debug.Log("Reloading!");
