@@ -11473,6 +11473,9 @@ MonoBehaviour:
   RenderTextureUI: {fileID: 978370227}
   MenuPanel: {fileID: 95491177}
   Player: {fileID: 757511260}
+  doorHospital: {fileID: 1257244101816290}
+  lightHospital: {fileID: 2132985620}
+  firstDoll: {fileID: 146765725}
 --- !u!4 &1668659428
 Transform:
   m_ObjectHideFlags: 0
@@ -13113,6 +13116,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892294430}
   m_Mesh: {fileID: 4300004, guid: 8c088c51437f8e84c8ccf368945d30c0, type: 3}
+--- !u!1 &1895415800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 186558, guid: 69cb242a1fba74349a02ddb98db59c0b, type: 3}
+  m_PrefabInstance: {fileID: 883150587}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1899433593 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 491830, guid: 32cfb3e46f2c5c9499b88966b82caf77, type: 3}
@@ -13232,6 +13240,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 417416, guid: 69cb242a1fba74349a02ddb98db59c0b, type: 3}
   m_PrefabInstance: {fileID: 883150587}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1921375124
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895415800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 881a3d2c0f016704290590b899048414, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1923298589
 GameObject:
   m_ObjectHideFlags: 0
@@ -14869,7 +14897,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4856336555255894}
   - component: {fileID: 694816366}
-  - component: {fileID: 4856336555255895}
   - component: {fileID: 4856336555255897}
   m_Layer: 0
   m_Name: P_Door_01_ ANIMATION DOOR
@@ -14963,19 +14990,6 @@ Transform:
   m_Father: {fileID: 65901793}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4856336555255895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257244101816290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b3db73c4294dd34794f6f6d673c3676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firstDoll: {fileID: 146765725}
 --- !u!95 &4856336555255897
 Animator:
   serializedVersion: 4

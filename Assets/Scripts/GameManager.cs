@@ -16,6 +16,12 @@ public class GameManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject Player;
 
+    //Hospital gameobjects
+    public GameObject doorHospital;
+    public GameObject lightHospital;
+    public GameObject firstDoll;
+    bool stopFunction = false;
+
     public static int dolls = 0;
 
 
@@ -53,10 +59,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        OpenFirstDoor();
 
     }
 
+
+   void OpenFirstDoor ()
+    {
+        if (firstDoll == null && !stopFunction)
+        {
+            lightHospital.GetComponent<Animator>().Play("LightFlicker");
+            doorHospital.GetComponent<Animator>().Play("OpenDoorAnimation");
+            stopFunction = true;
+        }
+    }
 
     public void LoadMenu()
     {
