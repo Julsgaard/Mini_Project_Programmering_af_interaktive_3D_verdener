@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject deathPanel;
     public GameObject dollsCollectedUI;
-    public TMP_Text dollsText;
+    //public TMP_Text dollsText;
 
     public GameObject Player;
 
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         deathPanel.SetActive(false);
         dollsCollectedUI.SetActive(false);
 
-        dollsText.text = "HELLO!";
+        //dollsText.text = "HELLO!";
     }
 
     // Update is called once per frame
