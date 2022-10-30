@@ -8,10 +8,12 @@ public class Enemy : MonoBehaviour
     public Transform Player;
     Animation anim;
 
-    NavMeshAgent NavMesh;
+    NavMeshAgent navMesh;
     Collider colliders;
+    AudioSource audioSource;
 
     bool dead = false;
+    public bool alwaysRunToPlayer = false;
 
     float health = 2;
 
@@ -23,23 +25,16 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        NavMesh = GetComponent<NavMeshAgent>();
+        navMesh = GetComponent<NavMeshAgent>();
         colliders = GetComponent<Collider>();
+        audioSource = GetComponent<AudioSource>();
 
     }
 
     void Update()
     {
 
-        if (Vector3.Distance(Player.transform.position, transform.position) < 15f && Vector3.Distance(Player.transform.position, transform.position) > 0 && !dead)
-        {
-
-            NavMesh.SetDestination(Player.position);
-            //transform.LookAt(Player);
-
-            anim.Play("Run");
-
-        }
+        RunAfterPlayer();
 
     }
 
@@ -51,9 +46,37 @@ public class Enemy : MonoBehaviour
             dead = true;
             anim["Death"].wrapMode = WrapMode.Once;
             anim.Play("Death");
-            NavMesh.enabled = false;
+            navMesh.enabled = false;
             colliders.enabled = false;
+            audioSource.enabled = false;
+
+            //Play death audio
+            
+
+            Object.Destroy(gameObject, 20.0f);
         }
     }
 
+    void RunAfterPlayer()
+    {
+        if (!alwaysRunToPlayer)
+        {
+            if (Vector3.Distance(Player.transform.position, transform.position) < 15f && Vector3.Distance(Player.transform.position, transform.position) > 0 && !dead)
+            {
+                navMesh.SetDestination(Player.position);
+
+                anim.Play("Run");
+
+            }
+        }
+        else
+        {
+            if (!dead)
+            {
+                navMesh.SetDestination(Player.position);
+
+                anim.Play("Run");
+            }
+        }
+    }
 }

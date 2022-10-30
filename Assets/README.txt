@@ -17,9 +17,8 @@ Genre:
 
 
 TODO:
-	Recoil
-	Animations in Hospital
 	Death Screen
 
 	Jump Scare
 
+	When every doll is collected then the player has to run to the exit. All the ghouls on the map will to to kill you!

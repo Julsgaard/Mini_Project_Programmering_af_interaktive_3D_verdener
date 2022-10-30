@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
-{
+{    
+
     //Unity CharacterController
     public CharacterController CharacterController;
     float Speed = 7f;
@@ -22,10 +25,11 @@ public class PlayerController : MonoBehaviour
 
     //Shoot
     float Damage = 1f;
-    float Range = 20f;
+    float Range = 40f;
     public Camera PlayerCamera;
     public ParticleSystem MuzzleFlash;
-    //public ParticleSystem ImpactEffect;
+    public ParticleSystem ImpactEffect;
+    public GameObject mainCamera;
 
 
     //Reload
@@ -39,6 +43,9 @@ public class PlayerController : MonoBehaviour
     public GameObject flashLight;
     bool flashLightIsOn = false;
 
+
+    public GameObject dollsCollectedUI;
+    public TMP_Text dollText;
 
     float time;
 
@@ -124,7 +131,7 @@ public class PlayerController : MonoBehaviour
     {
         time += Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1") && time >= 0.25f && !isReloading)
+        if (Input.GetMouseButtonDown(0) && time >= 0.25f && !isReloading)
         {
             if (currentAmmo > 0)
             {
@@ -153,17 +160,24 @@ public class PlayerController : MonoBehaviour
                         enemy.TakeDamage(Damage);
                     }
 
-                    /*
-                    if (Hit.transform.gameObject.CompareTag("Floor"))
+                    
+                    if (Hit.transform.gameObject.CompareTag("Terrain"))
                     {
-                        GameObject ImpactGameObject = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
-                        ImpactGameObject.transform.position += Vector3.up * 0.001f;
-                    }*/
+                        ParticleSystem ImpactParticle = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
+                        //ImpactParticle.transform.position += Vector3.up * 0.001f;
+                    }
+
                 }
+
+
+                //Recoil after the raycast so the shot hits the target
+                mainCamera.transform.Rotate(-7, 0, 0, Space.Self);
+
+
             }
             else
             {
-                //Play no shoot sound
+                //Play no bullets sound (click sound)
             }
         }
     }
@@ -231,6 +245,7 @@ public class PlayerController : MonoBehaviour
 
             //GameManager DEAD!!!
         }
+
     }
 
 
@@ -242,6 +257,9 @@ public class PlayerController : MonoBehaviour
             GameManager.dolls++;
             Destroy(other.gameObject);
             Debug.Log(GameManager.dolls);
+            
+            //Shows the dolls collected on the UI for 5 seconds
+            StartCoroutine(ShowDollsCollected());
         }
     }
 
@@ -265,4 +283,18 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("currentAmmo: " + currentAmmo);
 
     }
+
+
+    IEnumerator ShowDollsCollected()
+    {
+        dollText.text = $"Dolls {GameManager.dolls}/4";
+
+        dollsCollectedUI.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        dollsCollectedUI.SetActive(false);
+
+    }
+
 }
