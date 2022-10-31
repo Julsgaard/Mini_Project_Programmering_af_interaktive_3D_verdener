@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
     float UpLimit = -80;
     float DownLimit = 80;
 
-
     //Shoot
     float Damage = 1f;
     float Range = 40f;
@@ -30,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem MuzzleFlash;
     public ParticleSystem ImpactEffect;
     public GameObject mainCamera;
-
+    float time;
 
     //Reload
     int currentAmmo;
@@ -43,17 +42,18 @@ public class PlayerController : MonoBehaviour
     public GameObject flashLight;
     bool flashLightIsOn = false;
 
-
+    //UI
     public GameObject dollsCollectedUI;
     public TMP_Text dollText;
-
-    float time;
 
 
     void Start()
     {
         currentAmmo = maxAmmo;
 
+
+        //Move the player to the bed in the hospital 
+        //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
     }
 
     void Update()

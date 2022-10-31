@@ -7,9 +7,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    //PlayerController playerController;
 
-    static GameManager instance;
+    //static GameManager instance;
 
     public static bool GameIsActive;
     public static bool PlayerDead;
@@ -20,7 +19,6 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject deathPanel;
     public GameObject dollsCollectedUI;
-    //public TMP_Text dollsText;
 
     public GameObject Player;
 
@@ -65,7 +63,6 @@ public class GameManager : MonoBehaviour
         deathPanel.SetActive(false);
         dollsCollectedUI.SetActive(false);
 
-        //dollsText.text = "HELLO!";
     }
 
     // Update is called once per frame
@@ -73,13 +70,10 @@ public class GameManager : MonoBehaviour
     {
         OpenFirstDoor();
 
-
-        
-        //playerController.ShowDollsCollected(dollsCollected);
     }
 
 
-   void OpenFirstDoor ()
+    void OpenFirstDoor ()
     {
         if (firstDoll == null && !stopFunction)
         {

@@ -12,6 +12,7 @@ TagManager:
   - Doll
   - RockingChair
   - Terrain
+  - FlashLight
   layers:
   - Default
   - TransparentFX

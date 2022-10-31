@@ -79,4 +79,28 @@ public class Enemy : MonoBehaviour
             }
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("FlashLight"))
+        {
+            navMesh.SetDestination(Player.position);
+
+            anim.Play("Run");
+            Debug.Log("HITTING!!!");
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("FlashLight"))
+        {
+            navMesh.SetDestination(Player.position);
+
+            anim.Play("Run");
+            Debug.Log("HITTING COLLISION!!!");
+        }
+    }
+
+
 }
