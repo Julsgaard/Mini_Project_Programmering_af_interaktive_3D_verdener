@@ -46,11 +46,17 @@ public class PlayerController : MonoBehaviour
     public GameObject dollsCollectedUI;
     public TMP_Text dollText;
 
+    //Sounds
+    public AudioSource audioSource;
+    public AudioClip revolverShot;
+    public AudioClip revolverClick;
+
 
     void Start()
     {
         currentAmmo = maxAmmo;
 
+        audioSource = GetComponent<AudioSource>();
 
         //Move the player to the bed in the hospital 
         //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
@@ -126,34 +132,36 @@ public class PlayerController : MonoBehaviour
         CameraHolder.localRotation = Quaternion.Euler(CurrentRotation);
     }
 
-
+    
     public void Shoot()
     {
         time += Time.deltaTime;
 
-        if (Input.GetMouseButtonDown(0) && time >= 0.25f && !isReloading)
+        if (Input.GetMouseButtonDown(0) && time >= 0.3f && !isReloading)
         {
             if (currentAmmo > 0)
             {
+                //So the player can only shoot a few times every second
                 time = 0;
 
+                //Plays the unity particle system
                 MuzzleFlash.Play();
 
+                //One less bullet in the chamber
                 currentAmmo--;
 
                 //Debug.Log("currentAmmo: " + currentAmmo);
 
 
                 //Play Gunshot audio
-                /*AudioSource audio = GetComponent<AudioSource>();
-                audio.clip = GunShot;
-                audio.Play();*/
+                audioSource.clip = revolverShot;
+                audioSource.Play();
 
                 //Using raycast to shoot
                 RaycastHit Hit;
                 if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
                 {
-
+                    //Checking if the object hit by the raycast has the Enemy tag
                     if (Hit.transform.gameObject.CompareTag("Enemy"))
                     {
                         Enemy enemy = Hit.transform.GetComponent<Enemy>();
@@ -177,7 +185,11 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                //Play no bullets sound (click sound)
+                time = 0;
+
+                //Play no bullets sound
+                audioSource.clip = revolverClick;
+                audioSource.Play();
             }
         }
     }

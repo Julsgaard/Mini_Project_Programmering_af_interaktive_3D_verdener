@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     public static int dolls = 0;
 
+ 
 
 
     void Awake()
@@ -63,6 +64,8 @@ public class GameManager : MonoBehaviour
         deathPanel.SetActive(false);
         dollsCollectedUI.SetActive(false);
 
+
+        //Music.Play();
     }
 
     // Update is called once per frame
@@ -103,7 +106,7 @@ public class GameManager : MonoBehaviour
         PlayerDead = false;
         Time.timeScale = 1f;
 
-
+        SoundManager.audioSource.Stop();
 
         menuPanel.SetActive(false);
         //CanvasUI.SetActive(false);
