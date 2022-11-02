@@ -7,11 +7,13 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public SoundManager soundManager;
+
 
     //static GameManager instance;
 
-    public static bool GameIsActive;
-    public static bool PlayerDead;
+    //public static bool GameIsActive;
+    //public static bool PlayerDead;
 
     //UI
     public GameObject CanvasUI;
@@ -19,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject deathPanel;
     public GameObject dollsCollectedUI;
+    public GameObject victoryPanel;
 
     public GameObject Player;
 
@@ -27,6 +30,11 @@ public class GameManager : MonoBehaviour
     public GameObject lightHospital;
     public GameObject firstDoll;
     bool stopFunction = false;
+
+    //Exit gate
+    //public GameObject exitBoxCollider;
+    public GameObject exitGate;
+
 
     public static int dolls = 0;
 
@@ -59,19 +67,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RenderTextureUI.SetActive(true);
-        CanvasUI.SetActive(true);
-        deathPanel.SetActive(false);
-        dollsCollectedUI.SetActive(false);
 
+        LoadMenu();
 
-        //Music.Play();
+        dolls = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         OpenFirstDoor();
+
+        WinGame();
 
     }
 
@@ -89,9 +96,16 @@ public class GameManager : MonoBehaviour
     public void LoadMenu()
     {
         //SceneManager.LoadScene("Menu");
-        GameIsActive = false;
-        PlayerDead = false;
-        Time.timeScale = 1f;
+        //GameIsActive = false;
+        //PlayerDead = false;
+
+        RenderTextureUI.SetActive(true);
+        CanvasUI.SetActive(true);
+        deathPanel.SetActive(false);
+        dollsCollectedUI.SetActive(false);
+        victoryPanel.SetActive(false);
+
+        Time.timeScale = 0f;
 
         //MenuPanel.SetActive(true);
 
@@ -102,11 +116,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         //SceneManager.LoadScene("Scene1");
-        GameIsActive = true;
-        PlayerDead = false;
+        //GameIsActive = true;
+        //PlayerDead = false;
         Time.timeScale = 1f;
 
-        SoundManager.audioSource.Stop();
+        soundManager.PlayAmbientMusic();
 
         menuPanel.SetActive(false);
         //CanvasUI.SetActive(false);
@@ -117,11 +131,15 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void WinGame ()
+    void WinGame()
     {
         if (dolls >= 4)
         {
-            //
+
+
+            //Open exit gate
+            //exitBoxCollider.SetActive(false);
+            exitGate.GetComponent<Animator>().Play("OpenExitGate");
         }
     }
 

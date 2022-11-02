@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
-{    
+{
 
     //Unity CharacterController
     public CharacterController CharacterController;
@@ -45,11 +46,15 @@ public class PlayerController : MonoBehaviour
     //UI
     public GameObject dollsCollectedUI;
     public TMP_Text dollText;
+    public GameObject victoryPanel;
 
     //Sounds
     public AudioSource audioSource;
     public AudioClip revolverShot;
     public AudioClip revolverClick;
+
+    //Exit 
+    float exitTime;
 
 
     void Start()
@@ -60,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
         //Move the player to the bed in the hospital 
         //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
+
+        flashLight.SetActive(false);
     }
 
     void Update()
@@ -255,8 +262,11 @@ public class PlayerController : MonoBehaviour
         {
             //Time.timeScale = 0;
 
-            //GameManager DEAD!!!
+            //GameManager.PlayerDead = true;
+            SceneManager.LoadScene("DeathCutscene");
         }
+
+        exitTime = 0;
 
     }
 
@@ -272,6 +282,19 @@ public class PlayerController : MonoBehaviour
             
             //Shows the dolls collected on the UI for 5 seconds
             StartCoroutine(ShowDollsCollected());
+        }
+
+        
+        exitTime += Time.deltaTime;
+        if (other.gameObject.CompareTag("Exit") && GameManager.dolls >= 4) //&& exitTime > 5)
+        {
+            Debug.Log(exitTime);
+
+            //You escaped panel
+            //victoryPanel.SetActive(true);
+            //victoryPanel.GetComponent<Animator>().Play("VictoryPanel");
+
+            SceneManager.LoadScene("Victory");
         }
     }
 

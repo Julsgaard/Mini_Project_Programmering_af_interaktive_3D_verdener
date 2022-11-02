@@ -10,7 +10,9 @@ public class Enemy : MonoBehaviour
 
     NavMeshAgent navMesh;
     Collider colliders;
+    
     AudioSource audioSource;
+    public AudioClip deathClip;
 
     bool dead = false;
     public bool alwaysRunToPlayer = false;
@@ -48,10 +50,12 @@ public class Enemy : MonoBehaviour
             anim.Play("Death");
             navMesh.enabled = false;
             colliders.enabled = false;
-            audioSource.enabled = false;
+            //audioSource.enabled = false;
 
-            //Play death audio
-            
+            //Play death audio clip
+            audioSource.clip = deathClip;
+            audioSource.Play();
+            audioSource.loop = false;
 
             Object.Destroy(gameObject, 20.0f);
         }
@@ -59,13 +63,19 @@ public class Enemy : MonoBehaviour
 
     void RunAfterPlayer()
     {
+        //alwaysRunToPlayer is used for getting all the ghouls to run after the player when the 4 dolls are collected
         if (!alwaysRunToPlayer)
         {
-            if (Vector3.Distance(Player.transform.position, transform.position) < 15f && Vector3.Distance(Player.transform.position, transform.position) > 0 && !dead)
+            if (Vector3.Distance(Player.transform.position, transform.position) < 20f && Vector3.Distance(Player.transform.position, transform.position) > 0 && !dead)
             {
                 navMesh.SetDestination(Player.position);
 
                 anim.Play("Run");
+
+                //Ghoul running after player audioclip
+                //audioSource.clip = revolverClick;
+                //audioSource.Play();
+
 
             }
         }

@@ -13,6 +13,7 @@ TagManager:
   - RockingChair
   - Terrain
   - FlashLight
+  - Exit
   layers:
   - Default
   - TransparentFX

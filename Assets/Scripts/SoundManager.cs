@@ -10,6 +10,7 @@ public class SoundManager : MonoBehaviour
 
     //Music
     public AudioClip menuMusic;
+    public AudioClip ambientMusic;
 
 
     // Start is called before the first frame update
@@ -27,4 +28,13 @@ public class SoundManager : MonoBehaviour
     {
         
     }
+
+
+    public void PlayAmbientMusic()
+    {
+        audioSource.clip = ambientMusic;
+        audioSource.Play();
+        audioSource.loop = true;
+    }
+
 }
