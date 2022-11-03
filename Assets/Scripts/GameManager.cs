@@ -118,10 +118,13 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+
         //SceneManager.LoadScene("Scene1");
         //GameIsActive = true;
         //PlayerDead = false;
         Time.timeScale = 1f;
+
+        Player.transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
 
         //soundManager.PlayAmbientMusic();
         soundManager.PlayFirstClip();
@@ -129,6 +132,7 @@ public class GameManager : MonoBehaviour
         menuPanel.SetActive(false);
         //CanvasUI.SetActive(false);
         Player.SetActive(true);
+
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -143,7 +147,7 @@ public class GameManager : MonoBehaviour
             exitGate.GetComponent<Animator>().Play("OpenExitGate");
 
             //Play final clip
-            soundManager.PlayFinalClip();
+            //soundManager.PlayFinalClip();
         }
     }
 

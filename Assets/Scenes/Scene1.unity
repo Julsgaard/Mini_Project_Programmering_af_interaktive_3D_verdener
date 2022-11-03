@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.015085444, g: 0.018389557, b: 0.028301895, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.03
@@ -4200,15 +4200,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9144167987712491718, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 114
+      value: -2.524
       objectReference: {fileID: 0}
     - target: {fileID: 9144167987712491718, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.17
+      value: 2.691
       objectReference: {fileID: 0}
     - target: {fileID: 9144167987712491718, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 130.5
+      value: -146.159
       objectReference: {fileID: 0}
     - target: {fileID: 9144167987712491718, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4267,6 +4267,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: fbd4361a58b51854aa31b343ab3b3b1d, type: 3}
     - target: {fileID: 9144167987712491719, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
+      propertyPath: revolverReload
+      value: 
+      objectReference: {fileID: 8300000, guid: 006f8338214fe554aae03d4707f21bdb, type: 3}
+    - target: {fileID: 9144167987712491719, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: dollsCollectedUI
       value: 
       objectReference: {fileID: 426668538}
@@ -4280,7 +4284,7 @@ PrefabInstance:
       objectReference: {fileID: 19800002, guid: 99c73c92ac40473459640b165473206f, type: 3}
     - target: {fileID: 9144167987712491722, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
@@ -23360,7 +23364,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2071406946
 Transform:
   m_ObjectHideFlags: 0

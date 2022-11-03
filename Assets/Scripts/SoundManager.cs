@@ -42,6 +42,10 @@ public class SoundManager : MonoBehaviour
                 PlayFinalClip();
             }
         }
+        if (audioSource.clip == nextClip && GameManager.dolls == 4)
+        {
+            PlayFinalClip();
+        }
     }
 
     public void PlayFirstClip()

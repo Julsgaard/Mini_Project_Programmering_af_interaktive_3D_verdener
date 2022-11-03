@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip revolverShot;
     public AudioClip revolverClick;
+    public AudioClip revolverReload;
 
     //Exit 
     float exitTime;
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //Move the player to the bed in the hospital 
-        //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
+        transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
 
         //Turns off the flashlight when the game is started
         flashLight.SetActive(false);
@@ -100,14 +101,14 @@ public class PlayerController : MonoBehaviour
         }
 
         //Sprinting
-        if (Input.GetKey(KeyCode.LeftShift))
+        /*if (Input.GetKey(KeyCode.LeftShift))
         {
             Speed = 12;
         }
         else
         {
             Speed = 7;
-        }
+        }*/
 
         //Jumping
         if (Input.GetKeyDown(KeyCode.Space) && CharacterController.isGrounded)
@@ -313,6 +314,10 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("Reloading!");
 
         isReloading = true;
+
+        //Reload gun sound
+        audioSource.clip = revolverReload;
+        audioSource.Play();
 
         //Animation spin gun
         //Gun.transform.localEulerAngles
