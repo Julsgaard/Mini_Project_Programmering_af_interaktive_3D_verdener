@@ -89,6 +89,9 @@ public class GameManager : MonoBehaviour
         {
             lightHospital.GetComponent<Animator>().Play("LightFlicker");
             doorHospital.GetComponent<Animator>().Play("OpenDoorAnimation");
+            AudioSource doorHospitalAudioSource = doorHospital.GetComponent<AudioSource>();
+            doorHospitalAudioSource.Play();
+
             stopFunction = true;
         }
     }
@@ -120,7 +123,8 @@ public class GameManager : MonoBehaviour
         //PlayerDead = false;
         Time.timeScale = 1f;
 
-        soundManager.PlayAmbientMusic();
+        //soundManager.PlayAmbientMusic();
+        soundManager.PlayFirstClip();
 
         menuPanel.SetActive(false);
         //CanvasUI.SetActive(false);
@@ -135,11 +139,11 @@ public class GameManager : MonoBehaviour
     {
         if (dolls >= 4)
         {
-
-
             //Open exit gate
-            //exitBoxCollider.SetActive(false);
             exitGate.GetComponent<Animator>().Play("OpenExitGate");
+
+            //Play final clip
+            soundManager.PlayFinalClip();
         }
     }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 453880}
   m_Layer: 0
   m_Name: P_Floor_02
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 64480290884483218}
   m_Layer: 0
   m_Name: Floor_02
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 23451807498703262}
   m_Layer: 0
   m_Name: Object
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65

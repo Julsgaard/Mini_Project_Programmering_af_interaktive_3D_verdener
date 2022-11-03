@@ -867,6 +867,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1650842245, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6397926614305890690, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.08793336
@@ -1646,6 +1650,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 1337724068704285743, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
     - {fileID: 3465865828418121107, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
+    - {fileID: 1650842245, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e04ebc9920f22d046b26ef7427c872cd, type: 3}
 --- !u!1 &1285618592
 GameObject:

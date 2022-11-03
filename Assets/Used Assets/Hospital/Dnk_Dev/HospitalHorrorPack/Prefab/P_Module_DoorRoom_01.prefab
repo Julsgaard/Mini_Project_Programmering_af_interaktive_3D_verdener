@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4875963943707148}
   m_Layer: 0
   m_Name: P_Module_DoorRoom_01
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 64994613017684252}
   m_Layer: 0
   m_Name: Wall_Door_01
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 64042884759882098}
   m_Layer: 0
   m_Name: Walli
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 64507456015070856}
   m_Layer: 0
   m_Name: Tile02
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 64414033173331330}
   m_Layer: 0
   m_Name: Door_01_Base
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 64814958180294896}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -541,7 +541,7 @@ GameObject:
   - component: {fileID: 64807347660176102}
   m_Layer: 0
   m_Name: Tile01
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65

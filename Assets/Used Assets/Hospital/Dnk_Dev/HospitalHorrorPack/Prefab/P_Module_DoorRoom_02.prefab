@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 64877003077662372}
   m_Layer: 0
   m_Name: Door_01_Base
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 64014085703495842}
   m_Layer: 0
   m_Name: Windows_r
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 4607438403075378}
   m_Layer: 0
   m_Name: P_Module_DoorRoom_02
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 64244542655756420}
   m_Layer: 0
   m_Name: Windows_g
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 64754001111247500}
   m_Layer: 0
   m_Name: Tile02
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -445,7 +445,7 @@ GameObject:
   - component: {fileID: 64413501555024994}
   m_Layer: 0
   m_Name: Wall_Door_01
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 64988249640271826}
   m_Layer: 0
   m_Name: Tile01
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 64816193393467384}
   m_Layer: 0
   m_Name: Ceiling
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 64243005795676654}
   m_Layer: 0
   m_Name: Walli
-  m_TagString: Untagged
+  m_TagString: Concrete
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 65

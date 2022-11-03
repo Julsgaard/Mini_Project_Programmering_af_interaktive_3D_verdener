@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     float Range = 40f;
     public Camera PlayerCamera;
     public ParticleSystem MuzzleFlash;
-    public ParticleSystem ImpactEffect;
+    public ParticleSystem impactEffectTerrain;
+    public ParticleSystem impactEffectConcrete;
     public GameObject mainCamera;
     float time;
 
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
         //Move the player to the bed in the hospital 
         //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
 
+        //Turns off the flashlight when the game is started
         flashLight.SetActive(false);
     }
 
@@ -176,10 +178,16 @@ public class PlayerController : MonoBehaviour
                     }
 
                     
+                    //Bullet impact on terrain
                     if (Hit.transform.gameObject.CompareTag("Terrain"))
                     {
-                        ParticleSystem ImpactParticle = Instantiate(ImpactEffect, Hit.point, Quaternion.LookRotation(Vector3.up));
-                        //ImpactParticle.transform.position += Vector3.up * 0.001f;
+                        ParticleSystem ImpactParticle = Instantiate(impactEffectTerrain, Hit.point, Quaternion.LookRotation(Vector3.up));
+                    }
+
+                    //Bullet impact on concrete
+                    if (Hit.transform.gameObject.CompareTag("Concrete"))
+                    {
+                        ParticleSystem ImpactParticle = Instantiate(impactEffectConcrete, Hit.point, Quaternion.LookRotation(Vector3.up));
                     }
 
                 }
@@ -187,7 +195,6 @@ public class PlayerController : MonoBehaviour
 
                 //Recoil after the raycast so the shot hits the target
                 mainCamera.transform.Rotate(-7, 0, 0, Space.Self);
-
 
             }
             else
@@ -266,6 +273,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("DeathCutscene");
         }
 
+        //Resets the time if the player walk out of the exit collider
         exitTime = 0;
 
     }
@@ -278,7 +286,7 @@ public class PlayerController : MonoBehaviour
         {
             GameManager.dolls++;
             Destroy(other.gameObject);
-            Debug.Log(GameManager.dolls);
+            Debug.Log($"Dolls Collected: {GameManager.dolls}");
             
             //Shows the dolls collected on the UI for 5 seconds
             StartCoroutine(ShowDollsCollected());
@@ -286,7 +294,7 @@ public class PlayerController : MonoBehaviour
 
         
         exitTime += Time.deltaTime;
-        if (other.gameObject.CompareTag("Exit") && GameManager.dolls >= 4) //&& exitTime > 5)
+        if (other.gameObject.CompareTag("Exit") && GameManager.dolls >= 4 && exitTime > 3)
         {
             Debug.Log(exitTime);
 
