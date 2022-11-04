@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         //Move the player to the bed in the hospital 
-        transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
+        //transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
 
         //Turns off the flashlight when the game is started
         flashLight.SetActive(false);

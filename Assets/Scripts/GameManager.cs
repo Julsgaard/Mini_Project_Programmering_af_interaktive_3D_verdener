@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
         //PlayerDead = false;
         Time.timeScale = 1f;
 
-        Player.transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
+        //Player.transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
 
         //soundManager.PlayAmbientMusic();
         soundManager.PlayFirstClip();
