@@ -7,25 +7,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-
     //Unity CharacterController
     public CharacterController CharacterController;
-    float Speed = 7f;
+    float speed = 7f;
     float JumpSpeed = 7f;
 
     //Gravity
-    float Gravity = 20;
-    float VerticalSpeed = 0;
+    float gravity = 20;
+    float verticalSpeed = 0;
 
     //Rotate with mouse
-    public Transform CameraHolder;
-    float MouseSensitivity = 1f;
-    float UpLimit = -80;
-    float DownLimit = 80;
+    public Transform cameraholder;
+    float mouseSensitivity = 1f;
+    float upLimit = -80;
+    float downLimit = 80;
 
     //Shoot
-    float Damage = 1f;
-    float Range = 40f;
+    float damage = 1f;
+    float range = 40f;
     public Camera PlayerCamera;
     public ParticleSystem MuzzleFlash;
     public ParticleSystem impactEffectTerrain;
@@ -38,7 +37,6 @@ public class PlayerController : MonoBehaviour
     int maxAmmo = 6;
     bool isReloading = false;
     public GameObject Gun;
-    //int ammo = 12;
 
     //FlashLight
     public GameObject flashLight;
@@ -59,10 +57,13 @@ public class PlayerController : MonoBehaviour
     float exitTime;
 
 
+    // Start is called before the first frame update
     void Start()
     {
+        //Sets the current ammo to max ammo which is 6
         currentAmmo = maxAmmo;
 
+        //Gets the AudioSoruce from the GameObject
         audioSource = GetComponent<AudioSource>();
 
         //Move the player to the bed in the hospital 
@@ -72,20 +73,17 @@ public class PlayerController : MonoBehaviour
         flashLight.SetActive(false);
     }
 
+    // Update is called once per frame
     void Update()
     {
         Move();
         Rotate();
         Shoot();
         ReloadGun();
-        //AimGun();
         Flashlight();
-
-        //Debug.Log("ammo: " + ammo);
-
-
     }
 
+    //Move the player with the keyboard
     private void Move()
     {
         float HorizontalMove = Input.GetAxis("Horizontal");
@@ -93,65 +91,68 @@ public class PlayerController : MonoBehaviour
 
         if (CharacterController.isGrounded)
         {
-            VerticalSpeed = -2f;
+            verticalSpeed = -2f;
         }
         else
         {
-            VerticalSpeed -= Gravity * Time.deltaTime;
+            verticalSpeed -= gravity * Time.deltaTime;
         }
 
         //Sprinting
         /*if (Input.GetKey(KeyCode.LeftShift))
         {
-            Speed = 12;
+            speed = 12;
         }
         else
         {
-            Speed = 7;
+            speed = 7;
         }*/
 
         //Jumping
         if (Input.GetKeyDown(KeyCode.Space) && CharacterController.isGrounded)
         {
-            VerticalSpeed = JumpSpeed;
+            verticalSpeed = JumpSpeed;
         }
 
         //Adds gravity
-        Vector3 GravityMove = new Vector3(0, VerticalSpeed, 0);
+        Vector3 GravityMove = new Vector3(0, verticalSpeed, 0);
 
         Vector3 Move = transform.forward * VerticalMove + transform.right * HorizontalMove;
-        CharacterController.Move(Speed * Time.deltaTime * Move + GravityMove * Time.deltaTime);
+        CharacterController.Move(speed * Time.deltaTime * Move + GravityMove * Time.deltaTime);
     }
 
+    //Move around the camera with the mouse
     public void Rotate()
     {
         float HorizontalRotation = Input.GetAxis("Mouse X");
         float VerticalRotation = Input.GetAxis("Mouse Y");
 
-        transform.Rotate(0, HorizontalRotation * MouseSensitivity, 0);
-        CameraHolder.Rotate(-VerticalRotation * MouseSensitivity, 0, 0);
+        transform.Rotate(0, HorizontalRotation * mouseSensitivity, 0);
+        cameraholder.Rotate(-VerticalRotation * mouseSensitivity, 0, 0);
 
-        Vector3 CurrentRotation = CameraHolder.localEulerAngles;
+        Vector3 CurrentRotation = cameraholder.localEulerAngles;
 
         if (CurrentRotation.x > 180)
         {
             CurrentRotation.x -= 360;
         }
 
-        CurrentRotation.x = Mathf.Clamp(CurrentRotation.x, UpLimit, DownLimit);
-        CameraHolder.localRotation = Quaternion.Euler(CurrentRotation);
+        CurrentRotation.x = Mathf.Clamp(CurrentRotation.x, upLimit, downLimit);
+        cameraholder.localRotation = Quaternion.Euler(CurrentRotation);
     }
 
-    
+    //Shoot gun
     public void Shoot()
     {
         time += Time.deltaTime;
 
+        //Shoot gun if the left mouse button is clicked, the time is more than 0.3 and the gun is not reloading 
         if (Input.GetMouseButtonDown(0) && time >= 0.3f && !isReloading)
         {
+            //Checks if the current gun ammo is more than 0
             if (currentAmmo > 0)
             {
-                //So the player can only shoot a few times every second
+                //So the player can only shoot a few times every second - Resets the time
                 time = 0;
 
                 //Plays the unity particle system
@@ -162,44 +163,19 @@ public class PlayerController : MonoBehaviour
 
                 //Debug.Log("currentAmmo: " + currentAmmo);
 
-
                 //Play Gunshot audio
                 audioSource.clip = revolverShot;
                 audioSource.Play();
 
                 //Using raycast to shoot
-                RaycastHit Hit;
-                if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, Range))
-                {
-                    //Checking if the object hit by the raycast has the Enemy tag
-                    if (Hit.transform.gameObject.CompareTag("Enemy"))
-                    {
-                        Enemy enemy = Hit.transform.GetComponent<Enemy>();
-                        enemy.TakeDamage(Damage);
-                    }
+                RayCast();
 
-                    
-                    //Bullet impact on terrain
-                    if (Hit.transform.gameObject.CompareTag("Terrain"))
-                    {
-                        ParticleSystem ImpactParticle = Instantiate(impactEffectTerrain, Hit.point, Quaternion.LookRotation(Vector3.up));
-                    }
-
-                    //Bullet impact on concrete
-                    if (Hit.transform.gameObject.CompareTag("Concrete"))
-                    {
-                        ParticleSystem ImpactParticle = Instantiate(impactEffectConcrete, Hit.point, Quaternion.LookRotation(Vector3.up));
-                    }
-
-                }
-
-
-                //Recoil after the raycast so the shot hits the target
+                //Gun recoil, it is after the raycast so the shot hits the target before the recoil is applied
                 mainCamera.transform.Rotate(-7, 0, 0, Space.Self);
-
             }
             else
             {
+                //So the player can only shoot a few times every second - Resets the time
                 time = 0;
 
                 //Play no bullets sound
@@ -209,18 +185,47 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    //Using raycast to shoot
+    void RayCast()
+    {
+        RaycastHit Hit;
+        if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out Hit, range))
+        {
+            //Checking if the object hit by the raycast has the Enemy tag
+            if (Hit.transform.gameObject.CompareTag("Enemy"))
+            {
+                //Gets the enemy script from the GameObject hit by the raycast
+                Enemy enemy = Hit.transform.GetComponent<Enemy>();
+                //Runs the TakeDamage function with the damage argument
+                enemy.TakeDamage(damage);
+            }
+
+            //Instantiate bullet impact on terrain if the tag is "Terrain"
+            if (Hit.transform.gameObject.CompareTag("Terrain"))
+            {
+                ParticleSystem ImpactParticle = Instantiate(impactEffectTerrain, Hit.point, Quaternion.LookRotation(Vector3.up));
+            }
+
+            //Instantiate bullet impact on building if the tag is "Concrete"
+            if (Hit.transform.gameObject.CompareTag("Concrete"))
+            {
+                ParticleSystem ImpactParticle = Instantiate(impactEffectConcrete, Hit.point, Quaternion.LookRotation(Vector3.up));
+            }
+        }
+    }
+
+    //Reload the gun
     void ReloadGun()
     {
+        //If the "R" key is pressed, the currentAmmo is less than 6 and isReloading is false then the Coroutine ReloadWaitForSeconds will run 
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < 6 && !isReloading)
         {
             StartCoroutine(ReloadWaitForSeconds());
-
         }
 
+        //While the gun is reloading, the gun will rotate around its x-axis. Else the gun will reset to its original position
         if (isReloading)
         {
-            //Gun.transform.rotation = Quaternion.Euler(0, 0, 90);
-
             Gun.transform.Rotate(1f, 0, 0, Space.Self);
         }
         else
@@ -229,22 +234,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /*void AimGun()
-    {
-        if (Input.GetButton("Fire2"))
-        {
-            //Debug.Log("Test");
-
-
-        }
-            
-
-    }*/
-
-
-    //If T is pressed then the flashlight will turn on and off if it is pressed again
+    //Turn on and off Flashlight
     void Flashlight()
     {
+        //If T is pressed then the flashlight will turn on and off if it is pressed again
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (!flashLightIsOn)
@@ -260,12 +253,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
-
-
-    //Stops the game if colliding with enemy
+    //Triggered when on trigger collider enters the players collider
     void OnTriggerEnter(Collider other)
     {
+        //Loads "DeathCutscene" if the player is colliding with the enemy
         if (other.gameObject.CompareTag("Enemy"))
         {
             //Time.timeScale = 0;
@@ -276,15 +267,15 @@ public class PlayerController : MonoBehaviour
 
         //Resets the time if the player walk out of the exit collider
         exitTime = 0;
-
     }
 
-
-    //Picking up Dolls
+    //Updates when players collider is inside trigger collider
     void OnTriggerStay(Collider other)
     {
+        //Picking up Dolls with the key "E"
         if (other.gameObject.CompareTag("Doll") && Input.GetKey(KeyCode.E))
         {
+            //Adds one to the dolls int from GameManager and destroys the doll
             GameManager.dolls++;
             Destroy(other.gameObject);
             Debug.Log($"Dolls Collected: {GameManager.dolls}");
@@ -293,16 +284,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(ShowDollsCollected());
         }
 
-        
+        //Player has to stay in the exit collider for 3 seonds to win the game
         exitTime += Time.deltaTime;
+        //Loads "Victory" scene when the player is inside the Exit gate collider, 4 or more dolls are collected and the exitTime is more than 3
         if (other.gameObject.CompareTag("Exit") && GameManager.dolls >= 4 && exitTime > 3)
         {
-            Debug.Log(exitTime);
-
-            //You escaped panel
-            //victoryPanel.SetActive(true);
-            //victoryPanel.GetComponent<Animator>().Play("VictoryPanel");
-
+            //Debug.Log(exitTime);
             SceneManager.LoadScene("Victory");
         }
     }
@@ -311,38 +298,36 @@ public class PlayerController : MonoBehaviour
     //Reload timer Wait for 5 seconds
     IEnumerator ReloadWaitForSeconds()
     {
-        //Debug.Log("Reloading!");
-
+        //Sets isReloading to true, so the player can't shoot while reloading
         isReloading = true;
 
         //Reload gun sound
         audioSource.clip = revolverReload;
         audioSource.Play();
 
-        //Animation spin gun
-        //Gun.transform.localEulerAngles
-
+        //Waits for 5 seconds then continues the code
         yield return new WaitForSeconds(5);
 
+        //The ammo is set to maxAmmo which is 6
         currentAmmo = maxAmmo;
 
+        //isReloading is set back to false
         isReloading = false;
-
-        //Debug.Log("currentAmmo: " + currentAmmo);
-
     }
 
-
+    //Shows how many dolls the player has collected on the UI for 5 seconds
     IEnumerator ShowDollsCollected()
     {
+        //Sets the UI text
         dollText.text = $"Dolls {GameManager.dolls}/4";
 
+        //Displays the UI GameObject
         dollsCollectedUI.SetActive(true);
 
+        //Waits for 5 seconds then continues the code
         yield return new WaitForSeconds(5);
 
+        //Sets the GameObject SetActive state back to false
         dollsCollectedUI.SetActive(false);
-
     }
-
 }

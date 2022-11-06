@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 
 public class UIButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
 {
+    //AudioClips
     public AudioClip MouseOver;
     public AudioClip MouseClick;
 
+    //Plays sound when the mouse is over the button
     public void OnPointerEnter(PointerEventData eventData)
     {
         AudioSource audio = GetComponent<AudioSource>();
@@ -16,6 +18,7 @@ public class UIButtonSound : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         audio.Play();
     }
 
+    //Play sound when the button is pressed
     public void OnPointerDown(PointerEventData eventData)
     {
         AudioSource audio = GetComponent<AudioSource>();

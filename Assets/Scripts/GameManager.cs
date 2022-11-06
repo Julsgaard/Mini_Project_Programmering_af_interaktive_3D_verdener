@@ -7,13 +7,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    //SoundManager script
     public SoundManager soundManager;
-
-
-    //static GameManager instance;
-
-    //public static bool GameIsActive;
-    //public static bool PlayerDead;
 
     //UI
     public GameObject CanvasUI;
@@ -23,6 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject dollsCollectedUI;
     public GameObject victoryPanel;
 
+    //Player
     public GameObject Player;
 
     //Hospital gameobjects
@@ -32,42 +28,22 @@ public class GameManager : MonoBehaviour
     bool stopFunction = false;
 
     //Exit gate
-    //public GameObject exitBoxCollider;
     public GameObject exitGate;
 
-
+    //Dolls collected by the player
     public static int dolls = 0;
 
  
-
-
     void Awake()
     {
-        //Keeps the GameManager when changing scene and destroys the new GameManager when restarting level
-        /*if (instance != null)
-        {
-            Destroy(gameObject);
-            Destroy(CanvasUI);
-            Destroy(RenderTextureUI);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(CanvasUI);
-            DontDestroyOnLoad(RenderTextureUI);
-        }*/
-
+        //Pauses the game
         Time.timeScale = 0f;
-
     }
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-
+        //Load Menu when the game is started and collected dolls is set to 0
         LoadMenu();
 
         dolls = 0;
@@ -76,89 +52,85 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Checks if the first doll has been collected
         OpenFirstDoor();
 
+        //Checks if the player has collected 4 dolls
         WinGame();
-
     }
 
 
+    //Checks if the first doll has been collected and makes sure that the function only runs one time
     void OpenFirstDoor ()
     {
         if (firstDoll == null && !stopFunction)
         {
+            //Light flicker animation
             lightHospital.GetComponent<Animator>().Play("LightFlicker");
+            //Opens the first foor
             doorHospital.GetComponent<Animator>().Play("OpenDoorAnimation");
+
+            //Plays creaking door sound effect
             AudioSource doorHospitalAudioSource = doorHospital.GetComponent<AudioSource>();
             doorHospitalAudioSource.Play();
 
+            //Stops the function from running
             stopFunction = true;
         }
     }
 
+    //LoadMenu when game is started or the level is done
     public void LoadMenu()
     {
-        //SceneManager.LoadScene("Menu");
-        //GameIsActive = false;
-        //PlayerDead = false;
-
+        //Displays the correct UI
         RenderTextureUI.SetActive(true);
         CanvasUI.SetActive(true);
         deathPanel.SetActive(false);
         dollsCollectedUI.SetActive(false);
         victoryPanel.SetActive(false);
 
+        //Pauses the game
         Time.timeScale = 0f;
 
-        //MenuPanel.SetActive(true);
-
+        //Unlocks the cursor and makes in visble
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 
+    //Starts the game when the button "Play" is pressed
     public void StartGame()
     {
-
-        //SceneManager.LoadScene("Scene1");
-        //GameIsActive = true;
-        //PlayerDead = false;
+        //Sets the game time to 1 (normal speed)
         Time.timeScale = 1f;
 
-        //Player.transform.position = new Vector3(-2.6f, 2.4f, -146.4f);
-
-        //soundManager.PlayAmbientMusic();
+        //Plays the sound ambient music for the Hospital
         soundManager.PlayFirstClip();
 
+        //Deactiavtes the menu
         menuPanel.SetActive(false);
-        //CanvasUI.SetActive(false);
+
+        //Activates the Player
         Player.SetActive(true);
 
-
+        //Locks the cursor and makes in invisble
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-
+    //If 4 dolls are collected then the exit gate is opened 
     void WinGame()
     {
         if (dolls >= 4)
         {
-            //Open exit gate
+            //Opens the exit gate
             exitGate.GetComponent<Animator>().Play("OpenExitGate");
-
-            //Play final clip
-            //soundManager.PlayFinalClip();
         }
     }
 
-
-    //Quits the game
+    //Quits the game if the button "Quit" is pressed
     public void QuitGame()
     {
         Debug.Log("Quitting Game");
         Application.Quit();
     }
-
-
-
 }
