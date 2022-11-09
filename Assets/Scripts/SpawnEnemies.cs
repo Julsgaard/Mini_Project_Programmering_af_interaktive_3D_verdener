@@ -20,10 +20,10 @@ public class SpawnEnemies : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //When the second doll is collected 1 ghoul is instantiated every 60 seconds
+        //When the second doll is collected 1 ghoul is instantiated every 30 seconds
         if (GameManager.dolls == 2)
         {
-            InstantiateEnemies(1, 60f);
+            InstantiateEnemies(1, 30f);
 
             //Activates some more Ghouls
             if (runOnce)
@@ -42,10 +42,10 @@ public class SpawnEnemies : MonoBehaviour
             InstantiateEnemies(1, 10f);
         }
 
-        //When the fourth doll is collected 1 ghoul is instantiated every 5 seconds
+        //When the fourth doll is collected 1 ghoul is instantiated every 4 seconds
         else if (GameManager.dolls == 4)
         {
-            InstantiateEnemies(1, 5f);
+            InstantiateEnemies(1, 4f);
 
             //The new ghouls that are instantiated will run to the player
             enemy.alwaysRunToPlayer = true;

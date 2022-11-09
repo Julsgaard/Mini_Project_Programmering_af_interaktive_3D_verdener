@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     //Unity CharacterController
     public CharacterController CharacterController;
-    float speed = 7f;
+    float speed = 6f;
     float JumpSpeed = 7f;
 
     //Gravity
