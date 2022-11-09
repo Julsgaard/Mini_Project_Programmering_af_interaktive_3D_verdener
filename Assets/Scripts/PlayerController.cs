@@ -117,13 +117,17 @@ public class PlayerController : MonoBehaviour
         //Adds gravity
         Vector3 GravityMove = new Vector3(0, verticalSpeed, 0);
 
+        //The final vector3
         Vector3 Move = transform.forward * VerticalMove + transform.right * HorizontalMove;
+        
+        //Moveing the character
         CharacterController.Move(speed * Time.deltaTime * Move + GravityMove * Time.deltaTime);
     }
 
     //Move around the camera with the mouse
     public void Rotate()
     {
+        //Mouse X and Y axis
         float HorizontalRotation = Input.GetAxis("Mouse X");
         float VerticalRotation = Input.GetAxis("Mouse Y");
 
@@ -137,7 +141,10 @@ public class PlayerController : MonoBehaviour
             CurrentRotation.x -= 360;
         }
 
+        //Cmapls the currentrotation with the up and down limit
         CurrentRotation.x = Mathf.Clamp(CurrentRotation.x, upLimit, downLimit);
+        
+        //Adds the rotation to the camera
         cameraholder.localRotation = Quaternion.Euler(CurrentRotation);
     }
 
