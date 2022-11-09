@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
         //While the gun is reloading, the gun will rotate around its x-axis. Else the gun will reset to its original position
         if (isReloading)
         {
-            Gun.transform.Rotate(1f, 0, 0, Space.Self);
+            Gun.transform.Rotate(220f * Time.deltaTime, 0, 0, Space.Self);
         }
         else
         {

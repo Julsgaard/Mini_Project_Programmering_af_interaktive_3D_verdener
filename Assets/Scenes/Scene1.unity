@@ -12714,6 +12714,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Concrete
       objectReference: {fileID: 0}
+    - target: {fileID: 196198, guid: 32cfb3e46f2c5c9499b88966b82caf77, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196198, guid: 32cfb3e46f2c5c9499b88966b82caf77, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 491830, guid: 32cfb3e46f2c5c9499b88966b82caf77, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -16094,6 +16102,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Concrete
       objectReference: {fileID: 0}
+    - target: {fileID: 1451258660398768, guid: 425d4599260428c42a8ba97aa958d0f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1452042243277468, guid: 425d4599260428c42a8ba97aa958d0f6, type: 3}
       propertyPath: m_TagString
       value: Concrete
@@ -19218,8 +19230,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.6451078, y: 1, z: 0.7101236}
+  m_Center: {x: 0.010382491, y: 0, z: 0.1449353}
 --- !u!1001 &1048203314
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24231,6 +24243,14 @@ PrefabInstance:
     - target: {fileID: 171044, guid: 7476bea84d0c5ee46babced461b99665, type: 3}
       propertyPath: m_TagString
       value: Concrete
+      objectReference: {fileID: 0}
+    - target: {fileID: 171044, guid: 7476bea84d0c5ee46babced461b99665, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 171044, guid: 7476bea84d0c5ee46babced461b99665, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 495318, guid: 7476bea84d0c5ee46babced461b99665, type: 3}
       propertyPath: m_RootOrder

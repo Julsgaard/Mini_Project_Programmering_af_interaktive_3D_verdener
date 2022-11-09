@@ -11,12 +11,12 @@ public class SpawnDolls : MonoBehaviour
     void Start()
     {
         SpawnDoll();
-
     }
 
     void Update()
     {
-        if (dolls[0].activeSelf && dolls[1].activeSelf)
+        //So the first and second doll can not be active at the same time.
+        /*if (dolls[0].activeSelf && dolls[1].activeSelf)
         {
             int randomNumber = Random.Range(0, 2);
 
@@ -27,10 +27,10 @@ public class SpawnDolls : MonoBehaviour
                 dolls[1].SetActive(false);
 
             RandomDoll();
-        }
+        }*/
     }
 
-
+    //Runs the loop 3 times
     void SpawnDoll()
     {
         for (int i = 0; i < 3; i++)
@@ -38,6 +38,7 @@ public class SpawnDolls : MonoBehaviour
     }
 
 
+    //Gets a randomIndex, if the doll is already active then a new randomIndex is choosen. If the doll is not active then it is SetActive(true)
     void RandomDoll()
     {
         int randomIndex = Random.Range(0, dolls.Length);
