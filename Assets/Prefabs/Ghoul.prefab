@@ -2088,7 +2088,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.6
-  m_Speed: 8
+  m_Speed: 10
   m_Acceleration: 12
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2135,8 +2135,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 3.16
-  MaxDistance: 19.257805
+  MinDistance: 3
+  MaxDistance: 16.5
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
