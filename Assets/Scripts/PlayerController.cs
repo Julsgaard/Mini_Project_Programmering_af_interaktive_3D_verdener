@@ -89,6 +89,16 @@ public class PlayerController : MonoBehaviour
         float HorizontalMove = Input.GetAxis("Horizontal");
         float VerticalMove = Input.GetAxis("Vertical");
 
+        Vector3 moveDirection = new Vector3(HorizontalMove, 0, VerticalMove);
+
+        if (moveDirection.magnitude > 1)
+        {
+            moveDirection.Normalize();
+        }
+
+        // Move the direction based on player's orientation
+        moveDirection = transform.TransformDirection(moveDirection);
+
         if (CharacterController.isGrounded)
         {
             verticalSpeed = -2f;
@@ -98,30 +108,17 @@ public class PlayerController : MonoBehaviour
             verticalSpeed -= gravity * Time.deltaTime;
         }
 
-        //Sprinting
-        /*if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 12;
-        }
-        else
-        {
-            speed = 7;
-        }*/
-
-        //Jumping
+        // Jumping
         if (Input.GetKeyDown(KeyCode.Space) && CharacterController.isGrounded)
         {
             verticalSpeed = JumpSpeed;
         }
 
-        //Adds gravity
+        // Adds gravity
         Vector3 GravityMove = new Vector3(0, verticalSpeed, 0);
 
-        //The final vector3
-        Vector3 Move = transform.forward * VerticalMove + transform.right * HorizontalMove;
-        
-        //Moveing the character
-        CharacterController.Move(speed * Time.deltaTime * Move + GravityMove * Time.deltaTime);
+        // Moving the character
+        CharacterController.Move((moveDirection * speed * Time.deltaTime) + (GravityMove * Time.deltaTime));
     }
 
     //Move around the camera with the mouse
