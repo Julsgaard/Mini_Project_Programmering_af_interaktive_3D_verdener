@@ -127,25 +127,30 @@ public class PlayerController : MonoBehaviour
     //Move around the camera with the mouse
     public void Rotate()
     {
-        //Mouse X and Y axis
-        float HorizontalRotation = Input.GetAxis("Mouse X");
-        float VerticalRotation = Input.GetAxis("Mouse Y");
+        // Mouse X and Y axis
+        float HorizontalRotation = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float VerticalRotation = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-        transform.Rotate(0, HorizontalRotation * mouseSensitivity, 0);
-        cameraholder.Rotate(-VerticalRotation * mouseSensitivity, 0, 0);
+        // Rotate the player horizontally
+        transform.Rotate(0, HorizontalRotation, 0);
 
+        // Rotate the camera holder vertically and clamp the rotation
+        cameraholder.Rotate(-VerticalRotation, 0, 0);
+
+        // Get the current rotation of the camera holder
         Vector3 CurrentRotation = cameraholder.localEulerAngles;
 
+        // Adjust the x rotation to allow proper clamping
         if (CurrentRotation.x > 180)
         {
             CurrentRotation.x -= 360;
         }
 
-        //Cmapls the currentrotation with the up and down limit
+        // Clamp the x rotation
         CurrentRotation.x = Mathf.Clamp(CurrentRotation.x, upLimit, downLimit);
-        
-        //Adds the rotation to the camera
-        cameraholder.localRotation = Quaternion.Euler(CurrentRotation);
+
+        // Apply the clamped rotation
+        cameraholder.localRotation = Quaternion.Euler(CurrentRotation.x, 0, 0);
     }
 
     //Shoot gun
