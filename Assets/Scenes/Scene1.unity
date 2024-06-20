@@ -5573,7 +5573,7 @@ PrefabInstance:
     - target: {fileID: 9144167987712491719, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: revolverShot
       value: 
-      objectReference: {fileID: 8300000, guid: f5f713512deb87b419044a9d6b0958da, type: 3}
+      objectReference: {fileID: 8300000, guid: f47caac8ab1ec6640a0a066cbcd71bf7, type: 3}
     - target: {fileID: 9144167987712491719, guid: d1ec34fbc3a2b0f4fbfea8517931e10f, type: 3}
       propertyPath: victoryPanel
       value: 
